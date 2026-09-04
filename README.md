@@ -119,3 +119,7 @@ These are organized in a way which is helpful for reproduction and future review
 ## Evidence Base
 
 The current proposal uses the business statistics and data sources described in the STADIOEquities Information Pack for CAP182 SS1. The format and requirements of the assignment correspond to the CAP182 SS1 brief and CAP182 Topic 1 guidance for the module.
+
+## AI use declaration
+
+Anthropic's Claude was used in preparing this submission for brainstorming and structuring, for assistance in drafting and checking the proposed data request table, and for formatting.
