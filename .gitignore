@@ -1,12 +1,26 @@
-# Data (often too large or sensitive for git; keep a note in datasets/ instead)
-datasets/*.csv
-datasets/*.xlsx
-datasets/*.parquet
 # Python
 __pycache__/
 *.pyc
-.ipynb_checkpoints/
 .venv/
+venv/
 env/
+.ipynb_checkpoints/
+
+# Data (raw/large kept out of Git; regenerate via scripts/download_data.py)
+datasets/*.csv
+datasets/*.zip
+datasets/*.xlsx
+datasets/*.parquet
+datasets/raw/
+
+# Trained models / large artefacts (regenerable)
+models/*.pkl
+models/*.joblib
+models/*.json
+
 # OS
 .DS_Store
+.matplotlib-cache/
+
+# Local cleanup staging
+_to_delete/
