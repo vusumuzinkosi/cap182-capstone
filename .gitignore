@@ -24,3 +24,8 @@ models/*.json
 
 # Local cleanup staging
 _to_delete/
+
+# Local Word report drafts for Parts A and D (working copies only;
+# the committed deliverables are the exported PDFs)
+literature-review/*.docx
+recommendations/*.docx
