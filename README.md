@@ -1,122 +1,245 @@
-# STADIOEquities Account Activation Prediction
+# CAP182 Capstone - STADIOEquities Account Activation
 
 **Author:** Vusumuzi Nkosi  
 **Student number:** 26303296  
-**Module:** CAP182 Capstone Project  
+**Module:** CAP182 Capstone Project, STADIO  
 **Client:** STADIOEquities (retail investing and fintech)
 
-The proposed capstone project contains a binary classification model that assesses an account after registration within the first 24 hours of its lifetime and estimates the probability of the first deposit within 30 days. The score should allow the client to direct its efforts toward high-risk accounts only.
+In this repository, all the CAP182 capstone can be found as per its different stages of submission. The first submission (SS1) is the proposal for the project that contains motivation, problem definition, data request by the client and the log of RAAIDD. The second submission (SS2) is the proof of feasibility that tests the approach used in SS1 with a public data set before providing the client data.
 
-## 1. Motivation
+---
+
+# Submission 1 (SS1): Project proposal
+
+
+## Motivation
 
 ### 1.1 Business context
 
-The STADIOEquities platform for retail investing relies on creating a conversion from registrant to investor relationship that will create long-term value. Currently, the platform already demonstrates significant scale: the documents provided by the clients show around 2.3 million registered accounts, of which about 760,000 are funded and active. This means that the key growth potential is not only in expanding the number of registrations, but in enabling a higher percentage of existing and new clients to make their first step – to fund an account.
+The STADIOEquities platform used for retail investments depends on generating conversion between registrant and investor relationships that will generate value in the long run. Presently, the platform already has considerable scale – from the documentation provided by the clients, there are about 2.3 million accounts that have been registered, out of which, around 760,000 are funded accounts. This indicates that the area of opportunity is not just the increase in number of registrations, but in the funding of accounts by clients.
 
 ### 1.2 The business pain and its cost
 
-There are financial and strategic implications associated with the activation gap. As stated in the briefing pack, 41% of customers that have signed up do not go on to make deposits and the cost of acquiring such a customer is R180 that can only be recouped when an account is activated. In other words, there is a loss in marketing money if an account is dormant. There is even further worsening since the conversion from sign-up to deposit-making has dropped from 64% to 59% and from 22% to 31% for the six month dormancy. It seems like there are problems with the customer journey and not with their initial interests. The same onboarding activities should not be used for all the accounts since some of the customers might activate on their own and some might drop off onboarding due to certain issues.
+There are financial and strategic considerations with respect to the activation gap. From the briefing pack, it was noted that 41% of the customers who have registered never go on to make a deposit, and the cost of acquisition of such a customer is R180 which is recovered through activation. This means that there is a loss of marketing resources where there is dormancy. Further deterioration is expected because there has been a decrease in conversion from registration to making deposits from 64% to 59%, while for six months' dormancy from 22% to 31%. This implies that there must be something wrong in the customer journey process but not necessarily in the interest of the customer. The same onboarding process may not be applied to all accounts because some might activate by themselves, while others may not continue due to some reasons.
 
 ### 1.3 Why this is the right problem now
 
-The proposed project is directly contributing towards the 2030 strategy which is “activating our existing accounts.” The project is in line with the goal of the CEO to develop “a lifetime of investing with customers,” where the lifetime of investment starts only after the first deposit. It is very crucial for us to take immediate action as any delays in the process right after registration will allow interest to decrease.
+This project has been designed keeping in mind the strategy of 2030 which states that “activate our existing accounts.” This project has been designed in compliance with the objectives set by the CEO who wants to develop “a lifetime of investing with customers” wherein the investment journey begins only after making the first deposit. Delay at this stage after registering is not permissible since interest would be lost then.
 
 ### 1.4 Value of a data-science solution
 
-The model combines information at the point of registration with the first 24 hours’ worth of information, including the acquisition channel, the state of KYC, early application behavior, user-selected goals, and support friction, to predict the likelihood that each account will successfully make their first deposit in the next 30 days. STADIOEquities can use this scoring function to assign more resources such as human intervention, instructional material, reminders, and easier funding options to high-risk accounts, while sparing low-risk customers from too much interaction. This feature analysis will also expose common barriers in the customer journey for product and operations teams. Performance metrics to assess this model include recall, precision, area under the precision-recall curve, and lift among the top-risk customers, but not accuracy, which does not matter because the value for the business is in detecting stuck accounts without creating too many false alarms.
+This scoring model takes into account information at the time of registration combined with the information within the first 24 hours, including the channel used, the status of the KYC, initial behavior within the application, goals set by the user, and the level of friction when seeking support, to identify the probability of success of each account at making its first deposit in the next 30 days. STADIOEquities will be able to allocate more resources, including human intervention, educational materials, prompts, and easy funding, for the high-risk accounts, while avoiding inundating the low-risk customers with too much interaction. The features analysis will help in identifying the common challenges faced by customers during the journey for the product and operations teams. The metrics used to evaluate the performance of the model are recall, precision, area under the precision-recall curve, and lift within the highest risk customers, but not accuracy, as the accuracy of the model is not important for the business.
 
 ### 1.5 Expected contribution
 
-This effort is a way of recasting an expensive activation gap as a measurable decision, that is, which new clients need more help getting onboarded right now. An improvement in the deposit ratio, even a small one, could save wasted costs on acquisitions and help to increase the potential base for future investments.
+This exercise is a means of re-framing the costly activation gap as a quantifiable decision, specifically, who are the new customers that require additional assistance to be onboarded at this very moment. An increase in the deposit ratio, no matter how slight, will result in the saving of unnecessary acquisition expenses and will grow the pool of future investments.
 
-## 2. Problem Statement
+## Problem statement
 
-STADIOEquities has had a large number of new registrations but a relatively high number of these accounts do not move forward to their first deposits. The briefing pack mentions the decreasing sign-up to deposit conversion rate and increased early dormancy. This makes customer acquisition more costly. At the moment, there is no repeatable data-driven way to distinguish the accounts that have the potential to self-activate from those that are likely to stall.
+STADIOEquities has a lot of new registrations but at the same time a relatively big share of these accounts is not advancing to making the first deposit. The briefing pack refers to the declining sign-up to deposit conversion ratio and the growth of early dormancy. That makes customer acquisition expensive. Currently, there is no data-driven and repeatable method for selecting the accounts which can potentially self-activate and the accounts which are expected to stall.
 
-The capstone seeks to solve the issue of prediction of success of making the first deposit within 30 calendar days from the registration date for each newly registered account of STADIOEquities. Prediction would be provided no later than 24 hours after registration and would be based on the features known up to this cut-off time point – account and KYC process, early behavior within the application or website, selected customer and product features, acquisition history and early support events. Dates of the first deposits, balances, trading activity and other features available after the 24-hours cut-off would be used for creation or validation of the outcome and would not be used as predictors.
+The goal of the capstone project is solving the problem of prediction of success of making the first deposit within 30 calendar days from the registration date for every new account of STADIOEquities. Prediction should be made no later than 24 hours after registration and it should be made using the account and KYC features and customer's behavior within 24 hours after registration. Features available after the 24-hours cut-off date such as dates of the first deposits, balances and trading activity will be used to create or validate the outcome and will not be used as predictors.
 
-The capstone will provide a reproducible binary classification baseline, compare adequate classification algorithms, choose the threshold value for the decision. The result will be meaningful if it outperforms no-skill baseline on separated in time data and provides uplift among the accounts predicted to stall. The algorithm is a tool of prioritisation for onboarding help and does not make decisions regarding access, KYC, pricing or investment eligibility.
+The capstone will give the reproducible binary classification baseline, will compare different classifiers, will define the threshold value for the decision. The project will be successful when the model will outperform no-skill baseline on separated in time data and will provide an uplift among the accounts predicted to stall. The classifier is a tool for onboarding prioritisation and it does not make any decisions regarding access, KYC, pricing or investment eligibility.
 
-## 3. Repository Structure
+## Data request (Part C)
 
-These are organized in a way which is helpful for reproduction and future review of the capstone work.
+The full client data specification for this project is provided as a PDF at [data-request/CAP182_SS1_Data_Request.pdf](data-request/CAP182_SS1_Data_Request.pdf).
 
-| Path | What it holds |
-|---|---|
-| `datasets/` | Notes on the source of the data, where allowed, de-identified raw or processed datasets. Large and/or sensitive files are not stored in Git. |
-| `models/` | Models that were trained, serialized and saved, plus the associated model metadata. |
-| `experimental-setup/` | Feature definitions and instructions for splitting train/validation/test sets, as well as configurations and experimental parameters. |
-| `experimental-results/` | Evaluation statistics and confusions matrices, results tables and comparisons between models. |
-| `scripts/statistical/` | Statistical tests and diagnostic helper scripts. |
-| `scripts/comparison/` | Comparison scripts of candidate models, thresholds and experiments. |
-| `scripts/visualisation/` | Scripts for plotting and visualizations for presentation purposes. |
-| `data-request/` | The Part C data request, listing the data required from the client (`CAP182_SS1_Data_Request.pdf`). |
-| `README.md` | These include Part A motivation, Part B problem statement, Part D repository map, and Part E RAAIDD log. |
-
-## 4. RAAIDD Log
+## RAAIDD log
 
 ### Risks
 
 | # | Specific risk for this project |
 |---:|---|
-| 1 | There is no successful first-deposit event at all or there is more than one or a record is inconsistent across payment rails and results in an unreliable 30-day activation label. |
-| 2 | Features like current balance, date of first deposit, or other trading actions may reveal the target variable before building the model. |
-| 3 | Account IDs might not match consistently in different account, applications, marketing, compliance, and support databases and reduce the size of the training sample with the bias towards customers with better records. |
-| 4 | The behavior and distribution of dormant/stalled accounts might change after campaign, application release, or new KYC process, resulting in performance drift. |
-| 5 | There will be too many false positives for the onboarding team and may result in too much customer contact making a model practically useless. |
-| 6 | Personal, behavioral, and compliance data might be leaked or misused for other purposes besides activation unless certain identifier management practices, access, and retention control are enforced. |
+| 1 | No successful first-deposit event or more than one or inconsistency in recording it makes it impossible to provide an accurate 30-day activation tag. |
+| 2 | Information such as current balance, first deposit date, or other actions can give away the target variable in advance of model construction. |
+| 3 | Account ID may be inconsistent among different databases, including account, applications, marketing, compliance, and support databases, reducing the training set size due to selection bias towards better-recorded customers. |
+| 4 | Behavior and distribution of dormant/stalled accounts can shift following campaign or application release or new KYC procedure leading to performance drift. |
+| 5 | Too many false positives from the onboarding team can lead to too much customer contact making the model essentially unusable. |
+| 6 | Personal, behavioral, and compliance information can be used for activation purposes, unless certain management of identifiers and retention controls are put in place.  |
 
 ### Actions
 
 | # | Action in the project lifecycle |
 |---:|---|
-| 1 | Agreement about operational activation, 24 hour feature cut off, 30 day outcomes window with the client. |
-| 2 | Submission of the data request and getting de-identified extracts of the eight relevant client’s data sources. |
-| 3 | Keys profiling, range of dates determination, missing data detection and duplicates as well as referential integrity analysis before the source tables merge. |
-| 4 | Activation label reconstruction based on settled deposit events and reconciliation of the rate with the client provided control totals.|
-| 5 | Development of only such features which are available at the 24 hour score time and the explicit leakage assessment.|
-| 6 | Transparent baseline development, classification candidates training and their testing on the new period of time. |
-| 7 | Determination of the threshold according to onboarding capacity, recall, precision and lift and the description of the resulting balance of false negatives and false positives. |
-| 8 | Subgroup performance review, privacy protection and operation feasibility discussion with the client before proposing a pilot. |
+| 1 | Agreement on operational activation, 24 hours feature cut off, 30 days outcomes window with the client. |
+| 2 | Data Request submission and acquisition of de-identified extracts from eight data sources for client's data. |
+| 3 | Key Profiling, date ranges definition, missing data and duplicates identification as well as referential integrity checks prior to source tables merging. |
+| 4 | Activation flag recreation based on deposits events and reconciliation of the rate with the client's control totals. |
+| 5 | Creation of only those features that are present in 24 hour score and explicit leakage assessment. |
+| 6 | Transparent baseline creation, classification models training and their testing on a new time period. |
+| 7 | Identification of the threshold based on onboarding capacity, recall, precision and lift and description of the trade-off between false negatives and false positives. |
+| 8 | Subgroup performance analysis, privacy protection and operation feasibility discussion with the client prior to suggesting a pilot. |
 
 ### Assumptions
 
 | # | Assumption currently believed but unproven |
 |---:|---|
-| 1 | An account that makes a successful deposit with a positive value within 30 days qualifies as a sufficient and measurable criterion of account activation.|
-| 2 | There is at least 24 months' worth of registration and deposit outcomes available, where the latest cohort consists of a full 30-day observation window. |
-| 3 | The same pseudonymized account identifier suffices to identify the requested data sources, without resorting to any direct identifiers like names, IDs, email addresses, or banking information. |
-| 4 | KYC status, initial digital behavior, and acquisition context available within 24 hours hold information beyond just the activation rate. |
-| 5 | STADIOEquities has a legal basis and approved governance for using the requested data for this customer-support use case.|
-| 6 | The onboarding team is able to take action on a risk-ranked list, and provide its weekly contact capacity for threshold determination. |
+| 1 | An account which succeeds in depositing with a positive value in 30 days becomes a suitable and quantifiable measure of activation of the account. |
+| 2 | At least 24 months’ data related to registrations and deposits exist and the latest period contains a whole 30-day observation window. |
+| 3 | Using the same pseudonymized ID of an account will be sufficient to identify the needed data sources without relying on direct identifiers like names, ID numbers, e-mail addresses, or bank details. |
+| 4 | The KYC status, digital footprint at sign-up, and acquisition context of 24 hours have additional insights than mere activation rate. |
+| 5 | STADIOEquities has a legal ground for utilizing the above-mentioned data sources for the customer service use case in question. |
+| 6 | The onboarding team can act upon the ranked risk list, and share its weekly reach capacity. |
 
 ### Issues
 
 | # | Current issue |
 |---:|---|
-| 1 | No client dataset or data dictionary has been provided; thus, field availability, event semantics, cohort size, and baseline 30-day activation rates cannot be confirmed yet.  |
+| 1 | Client datasets or data dictionary not provided, therefore availability of the fields, events semantics, cohort size, as well as the initial baseline 30-day activation rates can’t be verified at the moment.  |
 
 ### Decisions
 
 | # | Decision made |
 |---:|---|
-| 1 | The client is identified as STADIOEquities, and the project scope is defined as supervised binary prediction of first deposit activation but not the wider problem of dormancy. |
-| 2 | Activation will be defined as successful positive-value deposit within 30 days and prediction based on data available within 24 hours after registration. |
-| 3 | The model will allow targeted onboarding support only; it will not automatically carry out KYC checks, provide account access, set pricing, decide marketing eligibility or make investments. |
-| 4 | Evaluation will focus on the metrics of recall, precision, precision-recall AUC, and top risk group lift using time-based holdout evaluation. |
+| 1 | Client is known to be STADIOEquities, project scope is considered to be supervised binary prediction for first deposit activation and not the more general problem of dormancy. |
+| 2 | Activation is considered to be successful positive-value deposit in 30 days and prediction is made based on data within 24 hours since registration. |
+| 3 | Model allows for targeted customer onboarding only, it does not make automatic KYC verification, grant access to an account, sets pricing, marketing eligibility, or makes investments. |
+| 4 | Evaluation will be performed based on the recall, precision, AUC of the precision-recall curve and top risk lift measures using time-based holdout evaluation approach. |
 
 ### Dependencies
 
 | # | Dependency between project activities |
 |---:|---|
-| 1 | The label creation depends on definition of activation and fullness of registration, deposit status, and timestamp fields. |
-| 2 | The cross-source feature engineering depends on the de-identification and successful joining of all related tables via pseudonymized account ID. |
-| 3 | Model training depends on data profiling, cleaning, duplicates reconciliation, and removal of fields occurring after the cut-off of scoring. |
-| 4 | The unbiased final evaluation will depend on definition and separation of the later time-based test cohort prior to model and threshold tuning. |
-| 5 | Threshold selection will depend on validated probabilities and confirmation of capacity for contact by the onboarding team as well as costs of false positives and negatives. |
-| 6 | Pilot running depends on good enough offline model performance, subgroup analysis and privacy check, stakeholders' approval, and controlled delivery of scores to onboarding staff. |
+| 1 | Label creation relies on definition of activation and completeness of registration, deposit, and timestamp fields. |
+| 2 | Cross-source feature engineering relies on de-identification and joining of all the relevant tables using pseudonymized account ID. |
+| 3 | Model training relies on data profiling, data cleansing, duplication reconciliation, and elimination of the fields that occur after the cut-off point of scoring. |
+| 4 | Unbiased final evaluation will rely on definition and segregation of the later time-based test group before tuning of the model and thresholds. |
+| 5 | Threshold setting will rely on validation of the probabilities and proof of the ability of contacting by the onboarding team as well as cost of the false positive/negatives. |
+| 6 | Pilot run will rely on satisfactory offline model performance, sub-group analysis, privacy checks, stakeholder approval, and controlled score distribution to the onboarding team. |
 
-## Evidence Base
+---
+
+# Submission 2 (SS2): Public-dataset proof of viability
+
+A binary classification model for predicting whether a new STADIOEquities 
+account will make their first deposit within 30 days was proposed by SS1. 
+The second system (SS2) attempts to verify the effectiveness of the solution 
+on a non-sensitive dataset, which is the Bank  Marketing Data Set from the UCI repository.
+
+Two models are compared:
+
+- **Model 1 - Logistic Regression:** an interpretable linear baseline.
+- **Model 2 - XGBoost:** a non-linear gradient-boosted tree ensemble.
+
+The duration field is deliberately excluded because it is known only after the
+marketing call ends. This matches the SS1 rule that only information available
+at scoring time may be used.
+
+## Deliverables
+
+| Part | Document | Related code |
+|---|---|---|
+| A | [Related Work and Data - PDF report](literature-review/CAP182_SS2_PartA_Related_Work.pdf) | Literature and dataset review (no code) |
+| B | [Modelling - consolidated PDF report](reports/CAP182_SS2_PartB_Modelling.pdf) | Required separate Markdown documents listed below |
+| B | [Preprocessing.MD](Preprocessing.MD) | scripts/preprocessing.py and scripts/common.py |
+| B | [FeatureEngineering.MD](FeatureEngineering.MD) | scripts/feature_engineering.py |
+| B | [Model1.MD](Model1.MD) | scripts/train_model1_logreg.py |
+| B | [Model2.MD](Model2.MD) | scripts/train_model2_xgboost.py |
+| C | [Results and Comparison - consolidated PDF report](reports/CAP182_SS2_PartC_Results.pdf) | Required separate Markdown documents listed below |
+| C | [Model1Performance.MD](Model1Performance.MD) | scripts/train_model1_logreg.py and scripts/evaluate.py |
+| C | [Model2Performance.MD](Model2Performance.MD) | scripts/train_model2_xgboost.py and scripts/evaluate.py |
+| C | [Comparison.MD](Comparison.MD) | scripts/compare_models.py and scripts/explain_models.py |
+| D | [Recommendations - PDF report](recommendations/CAP182_SS2_PartD_Recommendations.pdf) | Business recommendation report (no code) |
+
+Parts A and D are provided as PDF reports. Parts B and C are provided as the separate Markdown files that the brief requires (linked above), each with an additional consolidated PDF report.
+
+## Dataset
+
+UCI Bank Marketing, bank-additional-full.csv:
+
+- 41,188 rows
+- 20 raw input columns plus the target y
+- 4,640 positive cases (11.3%)
+- 19 raw inputs after excluding duration
+- SHA-256:
+  74adfc578bf77a7ff4bb1ba4a9f8709d9e3c6907342959c2c8416847e0afb4d8
+
+The raw CSV is ignored by Git and can be reproduced with
+scripts/download_data.py.
+
+## Verified held-out results
+
+The fixed stratified split uses random seed 42 and an 80/20 train/test ratio.
+Both models are evaluated on the same 8,238 test rows at threshold 0.50.
+
+| Metric | Logistic Regression | XGBoost |
+|---|---:|---:|
+| Accuracy | 0.8339 | 0.8496 |
+| Balanced accuracy | 0.7536 | 0.7614 |
+| Precision | 0.3663 | 0.3972 |
+| Recall | 0.6498 | 0.6476 |
+| Specificity | 0.8573 | 0.8752 |
+| F1 | 0.4685 | 0.4924 |
+| ROC-AUC | 0.8020 | 0.8090 |
+| PR-AUC | 0.4591 | 0.4868 |
+
+XGBoost produces 131 fewer false positives while losing only two true positives.
+McNemar's paired test gives p = 5.84 x 10^-8, supporting Model 2 as the stronger
+model on this test set.
+
+## Reproduce the experiment
+
+The verified environment uses Python 3.12.13 and the exact package versions in
+requirements.txt.
+
+~~~bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python scripts/run_all.py
+~~~
+
+On macOS, XGBoost also needs the OpenMP runtime:
+
+~~~bash
+brew install libomp
+~~~
+
+Individual stages can be run with:
+
+~~~bash
+python scripts/download_data.py
+python scripts/preprocessing.py
+python scripts/feature_engineering.py
+python scripts/train_model1_logreg.py
+python scripts/train_model2_xgboost.py
+python scripts/explain_models.py
+python scripts/compare_models.py
+~~~
+
+## Reproducibility controls
+
+- Random seed fixed and one stratified split used.
+- Pre-processing done solely on training set.
+- Duration measure, which is vulnerable to leakage, was not considered.
+- Specific Python version numbers used were fixed.
+- Checksum for dataset saved.
+- Environment versions obtained via scripts/environment_report.py script.
+- Models compared using paired holdout predictions.
+
+---
+
+## Repository structure
+
+| Path | What it holds |
+|---|---|
+| `README.md` | This document: the SS1 proposal (motivation, problem statement, data request, RAAIDD) and the SS2 overview, results and links. |
+| `data-request/` | SS1 Part C: the client data request PDF. |
+| `Preprocessing.MD`, `FeatureEngineering.MD` | SS2 Part B: data preparation documents. |
+| `Model1.MD`, `Model2.MD` | SS2 Part B: model implementation documents. |
+| `Model1Performance.MD`, `Model2Performance.MD`, `Comparison.MD` | SS2 Part C: results and model comparison documents. |
+| `literature-review/` | SS2 Part A: related-work review (PDF report). |
+| `reports/` | SS2 consolidated Part B and Part C review reports (PDF). |
+| `recommendations/` | SS2 Part D: recommendation report (PDF report). |
+| `scripts/` | SS2 pipeline: data acquisition, preprocessing, feature engineering, training, evaluation, explanation and comparison. |
+| `experimental-setup/` | Fixed experimental configuration and train/test split rules. |
+| `experimental-results/` | Metrics, paired predictions, comparison summary, feature effects and the ROC / precision-recall plot. |
+| `datasets/` | Local data location; the raw CSV is Git-ignored and downloaded via `scripts/download_data.py`. |
+| `models/` | Regenerable trained models; binaries are Git-ignored. |
+
+## Evidence base
 
 The current proposal uses the business statistics and data sources described in the STADIOEquities Information Pack for CAP182 SS1. The format and requirements of the assignment correspond to the CAP182 SS1 brief and CAP182 Topic 1 guidance for the module.
 
