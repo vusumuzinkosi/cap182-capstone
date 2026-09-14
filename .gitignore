@@ -29,3 +29,4 @@ _to_delete/
 # the committed deliverables are the exported PDFs)
 literature-review/*.docx
 recommendations/*.docx
+reports/*.docx
