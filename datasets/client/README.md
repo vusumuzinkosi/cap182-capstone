@@ -49,15 +49,19 @@ cc9f58657ac7890a34471f1c3daa0ec97d238516359afaebad9731d594b3b1bc  table8_funding
 
 ## Fields that were not used as predictors
 
-From the supplier's dictionary: `First deposit time`, `First deposit amount`,
-`First deposit status`, `Activated 30d`, `Funding event ID`, `Current balance`,
-`Closure time` on Table 1, and every column of Table 8.
+From the supplier's dictionary, on Table 1. Outcome or outcome-building: `First deposit
+time`, `First deposit amount`, `First deposit status`, `Activated 30d`, `Funding event ID`,
+`Activation deadline`. Measured after the outcome: `Current balance`, `Closure time`,
+`Extract time`. And every column of Table 8.
+
+Together with `Registration status` below, these are the ten fields held out in
+`LEAKAGE_COLUMNS` in section 0 of the notebook.
 
 Added after profiling: **`Registration status`**, as an extract-time snapshot of the outcome, it is used to define the modelling cohort but not as an input into any model.
 
 ## Modelling cohort
 
-The model is fitted on the 1,133 accounts with `Registration status == "complete"`, wwith an activation rate of 62.6%. The remaining 708 accounts – "incomplete", "rejected", "cancelled", and "closed" – activate at rates from 0% to 2.2%, their outcome is already known and so they are considered operational rule.
+The model is fitted on the 1,133 accounts with `Registration status == "complete"`, with an activation rate of 62.6%. The remaining 708 accounts – "incomplete", "rejected", "cancelled", and "closed" – activate at rates from 0% to 2.2%. Their outcome is already settled at extract time, so they are excluded by an operational rule rather than scored by the model.
 
 ## Known defects found during profiling
 
