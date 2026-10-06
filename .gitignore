@@ -13,6 +13,14 @@ datasets/*.xlsx
 datasets/*.parquet
 datasets/raw/
 
+# SS3 client extract: client material, not redistributed through the repository.
+# datasets/client/README.md documents it and records the checksums.
+datasets/client/*.csv
+datasets/client/*.zip
+datasets/client/*.parquet
+datasets/client/DATA_DICTIONARY.md
+datasets/client/QUALITY_CONTROLS.md
+
 # Trained models / large artefacts (regenerable)
 models/*.pkl
 models/*.joblib
