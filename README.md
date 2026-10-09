@@ -221,6 +221,61 @@ python scripts/compare_models.py
 
 ---
 
+# Submission 3 (SS3): The final method applied to the client data
+
+SS2 implemented the approach with a publicly available proxy dataset. SS3 implements the same approach on the full STADIOEquities extract and describes its value to the onboarding team.
+
+All parts of part B are implemented in a single notebook, [`SS3_PartB.ipynb`](SS3_PartB.ipynb), run from the root of the repository. The client data is not included in this write-up; the detailed description is available in [`datasets/client/README.md`](datasets/client/README.md), where the list of tables, the SHA-256 checksums, the target and window definitions, and the features excluded from modelling are provided.
+
+## The data
+
+Eight tables cover 1,841 registered accounts with the registration period from August 2024 to July 2026, in which all the outcome windows are mature. The row counts, keys, and referential integrity are consistent with the supplier's quality pack, and all the timestamps are ISO 8601.
+
+**The modelling cohort consists of 1,133 accounts with `Registration status` equal to "complete"** (they activate with 62.6%). The remaining 708 accounts with the registration status of incomplete, rejected, cancelled, or closed activate with 0% – 2.2%; the outcomes of these users are pre-determined and considered the operational rule rather than a score input. The `Registration status` is excluded from predictors for the same reason, as it is an extract-time snapshot that encodes the outcome.
+
+Features are derived only from the events that happened at or before the cut-off defined in SS1, which is registration plus 24 hours. Marketing events are the single exception to the lower bound, being filtered by the cut-off alone, because acquisition touchpoints happen earlier than registration.
+
+## The method
+
+XGBoost, the final method from SS2, continues to be used with the same pipeline. There were three hyperparameters adjusted for the cohort, which is roughly fifty times smaller than in SS2: `max_depth` decreased from 5 to 2, `min_child_weight` from 1 to 20, and `reg_lambda` from 1.0 to 10.0. The boosting was stopped once the validation log-loss had gone 50 consecutive rounds without improving. The justification of each adjustment is provided in the notebook. All other hyperparameters, including learning rate, sampling fractions, objective, and random seed, are the same as in SS2.
+
+The data split is time-based rather than random: the earliest 60% of registrations make up the training subset, the next 20% make up the validation subset used for threshold determination, and the latest 20% form a hold-out test subset.
+
+## Verified results for the unseen test subset
+
+There were 227 accounts in the test subset, out of which 57.7% had a positive outcome. The threshold determined on the validation subset was set at 0.340.
+
+| Metric | Training | Unseen test |
+|---|---:|---:|
+| ROC-AUC | 0.8215 | 0.7296 |
+| PR-AUC | 0.8921 | 0.7682 |
+| Precision | — | 0.6704 |
+| Recall | — | 0.9160 |
+| Specificity | — | 0.3854 |
+| Confusion (tn, fp, fn, tp) | — | 37, 59, 11, 120 |
+
+The boosting was stopped at iteration 318 out of 400 iterations ceiling. The difference in ROC-AUC between training and validation subsets is 0.088.
+
+**Implications and value.** By ranking the registrations by stall risk and calling the bottom 20% of the new registrants, 75.6% of the contacted registrations stall. This gives a lift of 1.79x over random contacting and accounts for 35.4% of all the potential stallers. At 30% capacity, the number of stallers captured rises to 47.9%, while the lift reduces to 1.60x, meaning that this decision is about onboarding capacity but not about modelling performance.
+
+**Comparative assessment with SS2, carried out with care.** While the headline precision and recall seem considerably better than SS2, the metrics are different depending on the base rate and represent 11.3% and 57.7% positive rates, respectively. As far as ROC-AUC, which is independent of the base rate, the client's model performs worse than the proof of concept (0.730 versus 0.809). The methodology is transferable and works well; however, this is a less challenging task with less room above chance than a more challenging one.
+
+## SS3 deliverables
+
+- Part A: Peer review report. Goes to Canvas, not held in this repository.
+- Part B: Implementation of the final method on the client data. Location: [`SS3_PartB.ipynb`](SS3_PartB.ipynb); the results are archived in `experimental-results/ss3_*`
+- Part C: Video presentation. Link will be put here after the recording.
+- Part D: Answers to client questions. Available in this repository's Discussions tab.
+
+## Reproduction of SS3
+
+- Create and activate a virtual environment: `python3 -m venv .venv` then `source .venv/bin/activate`
+- Install dependencies: `python -m pip install -r requirements.txt`
+- Verify the client dataset: `shasum -a 256 datasets/client/*.csv`
+- Run the notebook: `jupyter lab SS3_PartB.ipynb`, from the repository root, sequentially
+
+---
+
 ## Repository structure
 
 | Path | What it holds |
@@ -235,8 +290,10 @@ python scripts/compare_models.py
 | `recommendations/` | SS2 Part D: recommendation report (PDF report). |
 | `scripts/` | SS2 pipeline: data acquisition, preprocessing, feature engineering, training, evaluation, explanation and comparison. |
 | `experimental-setup/` | Fixed experimental configuration and train/test split rules. |
-| `experimental-results/` | Metrics, paired predictions, comparison summary, feature effects and the ROC / precision-recall plot. |
+| `experimental-results/` | SS2 metrics, paired predictions, comparison summary, feature effects and the ROC / precision-recall plot, plus the SS3 `ss3_*` metrics, predictions and figures. |
+| `SS3_PartB.ipynb` | SS3 Part B: the full client-data notebook, loading through results visualisation. |
 | `datasets/` | Local data location; the raw CSV is Git-ignored and downloaded via `scripts/download_data.py`. |
+| `datasets/client/` | SS3 client extract. The data is Git-ignored; `datasets/client/README.md` documents it and records the checksums. |
 | `models/` | Regenerable trained models; binaries are Git-ignored. |
 
 ## Evidence base
@@ -245,4 +302,4 @@ The current proposal uses the business statistics and data sources described in 
 
 ## AI use declaration
 
-Anthropic's Claude was used in preparing this submission for brainstorming and structuring, for assistance in drafting and checking the proposed data request table, and for formatting.
+Anthropic's Claude was used in preparing this submission for brainstorming and structuring, for assistance in drafting and checking the proposed data request table, and for formatting. For SS3 it was additionally used to help profile the client extract, to draft the notebook scaffolding and feature-aggregation code, and to review the analysis and check the reported figures against the saved outputs. The modelling decisions, the written interpretation and the conclusions are my own.
