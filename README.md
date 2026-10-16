@@ -245,18 +245,23 @@ The data split is time-based rather than random: the earliest 60% of registratio
 
 There were 227 accounts in the test subset, out of which 57.7% had a positive outcome. The threshold determined on the validation subset was set at 0.340.
 
-| Metric | Training | Unseen test |
-|---|---:|---:|
-| ROC-AUC | 0.8215 | 0.7296 |
-| PR-AUC | 0.8921 | 0.7682 |
-| Precision | — | 0.6704 |
-| Recall | — | 0.9160 |
-| Specificity | — | 0.3854 |
-| Confusion (tn, fp, fn, tp) | — | 37, 59, 11, 120 |
+| Metric | Training | Unseen test | 95% CI on the unseen test |
+|---|---:|---:|:---:|
+| ROC-AUC | 0.8215 | 0.7296 | [0.662, 0.794] |
+| PR-AUC | 0.8921 | 0.7682 | [0.688, 0.840] |
+| Precision | — | 0.6704 | [0.602, 0.735] |
+| Recall | — | 0.9160 | [0.866, 0.961] |
+| Specificity | — | 0.3854 | [0.290, 0.486] |
+| Confusion (tn, fp, fn, tp) | — | 37, 59, 11, 120 | — |
 
 The boosting was stopped at iteration 318 out of 400 iterations ceiling. The difference in ROC-AUC between training and validation subsets is 0.088.
 
-**Implications and value.** By ranking the registrations by stall risk and calling the bottom 20% of the new registrants, 75.6% of the contacted registrations stall. This gives a lift of 1.79x over random contacting and accounts for 35.4% of all the potential stallers. At 30% capacity, the number of stallers captured rises to 47.9%, while the lift reduces to 1.60x, meaning that this decision is about onboarding capacity but not about modelling performance.
+Intervals are a 95% percentile bootstrap over 2,000 resamples of the 227 test accounts, with the
+threshold held at the validation-chosen value, so they measure the precision of the test estimate
+on a fold of this size. Full values are in
+[`experimental-results/ss3_test_confidence_intervals.json`](experimental-results/ss3_test_confidence_intervals.json).
+
+**Implications and value.** By ranking the registrations by stall risk and calling the bottom 20% of the new registrants, 75.6% of the contacted registrations stall. This gives a lift of 1.79x over random contacting, 95% CI [1.48, 2.12], and accounts for 35.4% of all the potential stallers. At 30% capacity, the number of stallers captured rises to 47.9%, while the lift reduces to 1.60x, meaning that this decision is about onboarding capacity but not about modelling performance.
 
 **Comparative assessment with SS2, carried out with care.** While the headline precision and recall seem considerably better than SS2, the metrics are different depending on the base rate and represent 11.3% and 57.7% positive rates, respectively. As far as ROC-AUC, which is independent of the base rate, the client's model performs worse than the proof of concept (0.730 versus 0.809). The methodology is transferable and works well; however, this is a less challenging task with less room above chance than a more challenging one.
 
