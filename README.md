@@ -269,7 +269,7 @@ on a fold of this size. Full values are in
 
 - Part A: Peer review report. Goes to Canvas, not held in this repository.
 - Part B: Implementation of the final method on the client data. Location: [`SS3_PartB.ipynb`](SS3_PartB.ipynb); the results are archived in `experimental-results/ss3_*`
-- Part C: Video presentation. Link will be put here after the recording.
+- Part C: Video presentation (11:32). Watch it here: https://youtu.be/vK5F7muNSz8
 - Part D: Answers to client questions. Available in this repository's Discussions tab.
 
 ## Reproduction of SS3
