@@ -1,0 +1,76 @@
+{
+  "cohort_size": 1133,
+  "seed": 42,
+  "runs": {
+    "12": {
+      "best_iteration": 236,
+      "threshold": 0.28543591499328613,
+      "roc_auc": 0.6850349872773537,
+      "pr_auc": 0.7349272791117947,
+      "precision": 0.6172248803827751,
+      "recall": 0.9847328244274809,
+      "specificity": 0.16666666666666666,
+      "lift_at_20pct": 1.5763888888888888,
+      "cutoff_hours": 12,
+      "already_funded_by_cutoff": 0,
+      "already_funded_pct": 0.0,
+      "intervention_window_days_left": 29.5
+    },
+    "24": {
+      "best_iteration": 318,
+      "threshold": 0.32238078117370605,
+      "roc_auc": 0.7288486005089059,
+      "pr_auc": 0.7603271350896584,
+      "precision": 0.6486486486486487,
+      "recall": 0.916030534351145,
+      "specificity": 0.3229166666666667,
+      "lift_at_20pct": 1.7865740740740739,
+      "cutoff_hours": 24,
+      "already_funded_by_cutoff": 0,
+      "already_funded_pct": 0.0,
+      "intervention_window_days_left": 29.0
+    },
+    "36": {
+      "best_iteration": 237,
+      "threshold": 0.21176119148731232,
+      "roc_auc": 0.6850349872773536,
+      "pr_auc": 0.7276757125824171,
+      "precision": 0.5925925925925926,
+      "recall": 0.9770992366412213,
+      "specificity": 0.08333333333333333,
+      "lift_at_20pct": 1.6289351851851852,
+      "cutoff_hours": 36,
+      "already_funded_by_cutoff": 9,
+      "already_funded_pct": 0.79,
+      "intervention_window_days_left": 28.5
+    },
+    "48": {
+      "best_iteration": 340,
+      "threshold": 0.28182628750801086,
+      "roc_auc": 0.6911577608142494,
+      "pr_auc": 0.7396759376211348,
+      "precision": 0.6069651741293532,
+      "recall": 0.9312977099236641,
+      "specificity": 0.17708333333333334,
+      "lift_at_20pct": 1.4712962962962963,
+      "cutoff_hours": 48,
+      "already_funded_by_cutoff": 15,
+      "already_funded_pct": 1.32,
+      "intervention_window_days_left": 28.0
+    },
+    "72": {
+      "best_iteration": 175,
+      "threshold": 0.32897767424583435,
+      "roc_auc": 0.6805820610687023,
+      "pr_auc": 0.7105310391668163,
+      "precision": 0.6269430051813472,
+      "recall": 0.9236641221374046,
+      "specificity": 0.25,
+      "lift_at_20pct": 1.5238425925925927,
+      "cutoff_hours": 72,
+      "already_funded_by_cutoff": 48,
+      "already_funded_pct": 4.24,
+      "intervention_window_days_left": 27.0
+    }
+  }
+}

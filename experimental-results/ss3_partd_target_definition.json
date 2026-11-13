@@ -1,0 +1,21 @@
+{
+  "flagged_activated_30d": 713,
+  "rebuilt_settled_in_window": 694,
+  "flagged_but_not_rebuilt": 19,
+  "rebuilt_but_not_flagged": 0,
+  "settled_after_deadline": {
+    "accounts": 10,
+    "hours_late_min": 2.1,
+    "hours_late_max": 13.8
+  },
+  "reversal_fields": {
+    "deposits_with_status_reversed": 53,
+    "deposits_with_reversed_flag_true": 21,
+    "settled_deposits_carrying_the_flag": 0
+  },
+  "effect_of_stricter_definition": {
+    "activated_as_submitted": 694,
+    "activated_excluding_reversed_flag": 694,
+    "accounts_changing_label": 0
+  }
+}
